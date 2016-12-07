@@ -34,6 +34,6 @@
  */
 - (void)showInView:(UIView *)superView contentArray:(NSArray *)contentArray itemClickBlock:(ActionIdBlock)itemBlock;
 
-@property (nonatomic, weak) id<YXCustomActionSheetDelegate> delegate;
+@property (nonatomic) id<YXCustomActionSheetDelegate> delegate;
 
 @end

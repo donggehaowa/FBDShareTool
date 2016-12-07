@@ -23,7 +23,7 @@
 /**展示*/
 - (void)showInView:(UIView *)superView contentArray:(NSArray *)contentArray;
 
-@property (nonatomic, weak) id<YXScrollowActionSheetDelegate> delegate;
+@property (nonatomic) id<YXScrollowActionSheetDelegate> delegate;
 
 
 
