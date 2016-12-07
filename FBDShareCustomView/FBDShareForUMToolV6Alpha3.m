@@ -5,6 +5,12 @@
 //  Created by feng on 2016/11/22.
 //  Copyright © 2016年 冯宝东. All rights reserved.
 //
+#define APPShareImage [UIImage imageNamed:@"ShareIcon120.png"]
+#define SHOW_ALERTdiss(msg) UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"温馨提示" message:msg delegate:nil cancelButtonTitle:nil otherButtonTitles:nil, nil];\
+[alert show];\
+dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{\
+[alert dismissWithClickedButtonIndex:0 animated:YES];\
+});
 
 #import "FBDShareForUMToolV6Alpha3.h"
 static FBDShareForUMToolV6Alpha3* sigleShareTon;
@@ -94,8 +100,7 @@ static FBDShareForUMToolV6Alpha3* sigleShareTon;
             thumbURL=indexImage;
             
         }else{
-//            thumbURL=APPShareImage;
-                        thumbURL=nil;
+            thumbURL=APPShareImage;
         }
     }
 
