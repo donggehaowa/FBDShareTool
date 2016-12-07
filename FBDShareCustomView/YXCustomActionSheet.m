@@ -178,27 +178,27 @@
     _costomPlatformArray=[NSMutableArray arrayWithArray:contentArray];
     
     //检测wechat和QQ还有Sina
-    BOOL wechatInstall= [[UMSocialManager defaultManager]isInstall:UMSocialPlatformType_WechatSession];
-    if (!wechatInstall)
-    {
-        [_costomPlatformArray removeObjectsInRange:NSMakeRange(3, 3)];
-    }
-    BOOL qqZoneInstall=[[UMSocialManager defaultManager]isInstall:UMSocialPlatformType_Qzone];
-    if (!qqZoneInstall)
-    {
-        [_costomPlatformArray removeObjectsInRange:NSMakeRange(2, 1)];
-    }
-    BOOL qqInstall= [[UMSocialManager defaultManager]isInstall:UMSocialPlatformType_QQ];
-    
-    if (!qqInstall)
-    {
-        [_costomPlatformArray removeObjectsInRange:NSMakeRange(1, 1)];
-    }
-    BOOL sinaInstall= [[UMSocialManager defaultManager]isInstall:UMSocialPlatformType_Sina];
-    if (!sinaInstall)
-    {
-        [_costomPlatformArray removeObjectAtIndex:0];
-    }
+//    BOOL wechatInstall= [[UMSocialManager defaultManager]isInstall:UMSocialPlatformType_WechatSession];
+//    if (!wechatInstall)
+//    {
+//        [_costomPlatformArray removeObjectsInRange:NSMakeRange(3, 3)];
+//    }
+//    BOOL qqZoneInstall=[[UMSocialManager defaultManager]isInstall:UMSocialPlatformType_Qzone];
+//    if (!qqZoneInstall)
+//    {
+//        [_costomPlatformArray removeObjectsInRange:NSMakeRange(2, 1)];
+//    }
+//    BOOL qqInstall= [[UMSocialManager defaultManager]isInstall:UMSocialPlatformType_QQ];
+//    
+//    if (!qqInstall)
+//    {
+//        [_costomPlatformArray removeObjectsInRange:NSMakeRange(1, 1)];
+//    }
+//    BOOL sinaInstall= [[UMSocialManager defaultManager]isInstall:UMSocialPlatformType_Sina];
+//    if (!sinaInstall)
+//    {
+//        [_costomPlatformArray removeObjectAtIndex:0];
+//    }
     //是否添加自定义平台操作
     if (_isShowMoreCostomPlatform) {
         [_costomPlatformArray addObject:@{@"name":@"收藏",@"icon":@"MyFavIcon.png",@"UMSocialPlatformType":@1111}];

@@ -10,5 +10,4 @@
 #define FBDShareHeader_h
 #import "YXCustomActionSheet.h"
 #import "YXScrollowActionSheet.h"
-#import "FBDShareForUMToolV6Alpha3.h"
 #endif /* FBDShareHeader_h */
