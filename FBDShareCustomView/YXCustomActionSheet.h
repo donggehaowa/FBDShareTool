@@ -5,7 +5,9 @@
 //  Created by Houhua Yan on 16/7/14.
 //  Copyright © 2016年 YanHouhua. All rights reserved.
 //
-#import "Header.h"
+//#import "Header.h"
+#define SHOW_ALERTdiss  
+typedef void(^ActionIdBlock)(id obj);
 #import <UIKit/UIKit.h>
 #import "YXActionSheetButton.h"
 
