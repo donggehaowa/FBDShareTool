@@ -44,5 +44,7 @@ Pod::Spec.new do |s|
   #  you can include multiple dependencies to ensure it works.
 
   # s.xcconfig = { "HEADER_SEARCH_PATHS" => "$(SDKROOT)/usr/include/libxml2" }
-  # s.dependency "JSONKit", "~> 1.4"
+   s.dependency "UMengUShare/Social/Sina"
+   s.dependency "UMengUShare/Social/WeChat"
+   s.dependency "UMengUShare/Social/QQ"
 end
