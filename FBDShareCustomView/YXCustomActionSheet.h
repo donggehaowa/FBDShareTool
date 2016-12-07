@@ -10,7 +10,7 @@
 typedef void(^ActionIdBlock)(id obj);
 #import <UIKit/UIKit.h>
 #import "YXActionSheetButton.h"
-
+#import <UMengUShare/UMSocialCore/UMSocialCore.h>
 @protocol YXCustomActionSheetDelegate <NSObject>
 
 @optional
