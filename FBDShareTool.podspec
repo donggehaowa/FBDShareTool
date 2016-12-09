@@ -1,7 +1,7 @@
 
 Pod::Spec.new do |s|
   s.name         = "FBDShareTool"
-  s.version      = "0.1"
+  s.version      = "0.2"
   s.summary      = "FBDShareTool 是自定义Share 分享的UI界面 以后还要基于友盟分享的ShareCore进行分享的扩展 "
   s.homepage     = "https://github.com/donggehaowa/FBDShareTool"
   s.license      = "MIT"
