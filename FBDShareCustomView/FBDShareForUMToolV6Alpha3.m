@@ -5,7 +5,7 @@
 //  Created by feng on 2016/11/22.
 //  Copyright © 2016年 冯宝东. All rights reserved.
 //
-#define APPShareImage [UIImage imageNamed:@"ShareIcon120.png"]
+#define APPShareImage [UIImage imageNamed:@"Icon-Small-40.png"]
 #define SHOW_ALERTdiss(msg) UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"温馨提示" message:msg delegate:nil cancelButtonTitle:nil otherButtonTitles:nil, nil];\
 [alert show];\
 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{\
@@ -52,24 +52,24 @@ static FBDShareForUMToolV6Alpha3* sigleShareTon;
     [self shareWebPageToPlatformType:platformType withDeleagte:delegate];
     self.shareSuccessBlock=successBlock!=nil?successBlock:nil;
     self.shareFailedBlock=(failedBlock!=nil)?failedBlock:nil;
-    //优化代码   
-//    if (successBlock)
-//    {
-//        self.shareSuccessBlock=successBlock;
-//    }else
-//    {
-//        self.shareSuccessBlock=nil;
-//    }
-//    if (failedBlock) {
-//        self.shareFailedBlock=failedBlock;
-//    }else
-//    {
-//        self.shareFailedBlock=nil;
-//    }
-
+    //优化代码
+    //    if (successBlock)
+    //    {
+    //        self.shareSuccessBlock=successBlock;
+    //    }else
+    //    {
+    //        self.shareSuccessBlock=nil;
+    //    }
+    //    if (failedBlock) {
+    //        self.shareFailedBlock=failedBlock;
+    //    }else
+    //    {
+    //        self.shareFailedBlock=nil;
+    //    }
     
     
-
+    
+    
 }
 
 
@@ -79,31 +79,51 @@ static FBDShareForUMToolV6Alpha3* sigleShareTon;
 {
     //创建分享消息对象
     UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
-    
     //创建网页内容对象
     //    UMShareWebpageObject *shareObject = [UMShareWebpageObject shareObjectWithTitle:@"分享标题" descr:@"分享内容描述" thumImage:[UIImage imageNamed:@"icon"]];
-    id thumbURL=nil;
-    //网络地址
-    if (([_shareImage isKindOfClass:[NSString class]]&&[_shareImage hasPrefix:@"http://"])||([_shareImage isKindOfClass:[NSString class]]&&[_shareImage hasPrefix:@"https://"]))
-    {
-        thumbURL=_shareImage;
-    }else//二进制图片或者Data数据
-    if ([_shareImage isKindOfClass:[UIImage class]]||[_shareImage isKindOfClass:[NSData class]])
-    {
-        thumbURL=_shareImage;
     
-    }else//本地图片的名字
+    id thumbURL=nil;
+    // V2.1  优化ShareImage的逻辑
+    // 空 nil的情况
+    if (!_shareImage)
     {
-        if (!_shareImage)
+        if (APPShareImage)
         {
-            UIImage * indexImage=[UIImage imageNamed:_shareImage];
-            thumbURL=indexImage;
-            
-        }else{
             thumbURL=APPShareImage;
+        }else
+        {
+            //本地APP的图标
+            NSString* appBundleId=[[NSBundle mainBundle] bundleIdentifier];
+            NSDictionary *infoPlist = [[NSBundle mainBundle] infoDictionary];
+            NSString *icon = [[infoPlist valueForKeyPath:@"CFBundleIcons.CFBundlePrimaryIcon.CFBundleIconFiles"] lastObject];
+            UIImage *thumbImage =[UIImage imageNamed:icon];
+            thumbURL=thumbImage;
         }
+        
+    }else
+    {
+        //如果是字符串
+        if ([_shareImage isKindOfClass:[NSString class]])
+        {
+            //网络地址
+            if (([_shareImage isKindOfClass:[NSString class]]&&[_shareImage hasPrefix:@"http://"])||([_shareImage isKindOfClass:[NSString class]]&&[_shareImage hasPrefix:@"https://"]))
+            {
+                thumbURL=_shareImage;
+            }
+            //本地地址 图片名字
+            else
+            {
+                thumbURL=[UIImage imageNamed:_shareImage];
+            }
+            
+            //二进制图片
+        }else if([_shareImage isKindOfClass:[UIImage class]]||[_shareImage isKindOfClass:[NSData class]])
+        {
+            thumbURL=_shareImage;
+        }
+        
     }
-
+    
     if (!thumbURL) {
         NSLog(@"#warming  请选择一张分享的图片logo");
         return;
@@ -188,9 +208,9 @@ static FBDShareForUMToolV6Alpha3* sigleShareTon;
             result = [NSString stringWithFormat:@"分享失败"];
         }
         
-    }    
+    }
     SHOW_ALERTdiss(result);
-
+    
 }
 -(void)fbdShareUM_AboutTitle:(NSString*)title
 {
