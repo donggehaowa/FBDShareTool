@@ -83,6 +83,8 @@ static FBDShareForUMToolV6Alpha3* sigleShareTon;
     //    UMShareWebpageObject *shareObject = [UMShareWebpageObject shareObjectWithTitle:@"分享标题" descr:@"分享内容描述" thumImage:[UIImage imageNamed:@"icon"]];
     
     id thumbURL=nil;
+    // V2.2  对NSLog变成相应的提示 去掉：适配iOS 的ATS https的问题
+    
     // V2.1  优化ShareImage的逻辑
     // 空 nil的情况
     if (!_shareImage)
@@ -125,29 +127,29 @@ static FBDShareForUMToolV6Alpha3* sigleShareTon;
     }
     
     if (!thumbURL) {
-        NSLog(@"#warming  请选择一张分享的图片logo");
+        SHOW_ALERTdiss(@"请选择一张分享的图片logo");
         return;
     }
     if (!_shareContent) {
-        NSLog(@"#warming %@",@"请设置:分享内容描述");
+        SHOW_ALERTdiss(@"请设置:分享内容描述");
         return;
     }
     if (!_shareTitle)
     {
-        NSLog(@"#warming %@",@"请设置:分享标题title");
+        SHOW_ALERTdiss(@"请设置:分享标题title");
         return;
     }
     if (!_shareWebURL) {
-        NSLog(@"#warming%@",@"请设置:分享的链接URL");
+        SHOW_ALERTdiss(@"请设置:分享的链接URL");
         return;
     }
     //适配iOS 的ATS https的问题
-    if ([_shareWebURL hasPrefix:@"https://"])
-    {
-        _shareWebURL=[_shareWebURL substringFromIndex:8];
-        _shareWebURL=[NSString stringWithFormat:@"%@%@",@"http://",_shareWebURL];
-        NSLog(@"调整过后 分享的web URl is %@",_shareWebURL);
-    }
+//    if ([_shareWebURL hasPrefix:@"https://"])
+//    {
+//        _shareWebURL=[_shareWebURL substringFromIndex:8];
+//        _shareWebURL=[NSString stringWithFormat:@"%@%@",@"http://",_shareWebURL];
+//        NSLog(@"调整过后 分享的web URl is %@",_shareWebURL);
+//    }
     
     
     //UMSocialPlatformType_Sina 新浪 pod 避免提示重定义
