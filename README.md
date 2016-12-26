@@ -157,3 +157,7 @@ FBDShareForUMToolV6Alpha3 是基于 UM 友盟的ShareCore的进行分享的逻�
 
 
 ```
+###  更新说明：
+#### // V2.2  对NSLog变成相应的提示 去掉：适配iOS 的ATS https的问题
+
+
