@@ -15,6 +15,9 @@ dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), 
 #import "FBDShareForUMToolV6Alpha3.h"
 static FBDShareForUMToolV6Alpha3* sigleShareTon;
 @implementation FBDShareForUMToolV6Alpha3
+{
+    NSString* removeURLContent;
+}
 
 /**
  *      @author 冯宝东
@@ -143,20 +146,25 @@ static FBDShareForUMToolV6Alpha3* sigleShareTon;
         SHOW_ALERTdiss(@"请设置:分享的链接URL");
         return;
     }
-    //适配iOS 的ATS https的问题
-//    if ([_shareWebURL hasPrefix:@"https://"])
-//    {
-//        _shareWebURL=[_shareWebURL substringFromIndex:8];
-//        _shareWebURL=[NSString stringWithFormat:@"%@%@",@"http://",_shareWebURL];
-//        NSLog(@"调整过后 分享的web URl is %@",_shareWebURL);
-//    }
-    
+    //V2.3把分享内容里面的链接去掉文章的URL  思路：用http分割 祛除掉文章的链接 再用http拼接
+    removeURLContent=self.shareContent;
+    NSArray*contentArray=[removeURLContent componentsSeparatedByString:@"http"];
+    //如果有两个URL就去除掉最后的文章的URL
+    if (contentArray.count>2)
+    {
+        NSMutableArray* tempContentArray=[NSMutableArray arrayWithArray:contentArray];
+        [tempContentArray removeLastObject];
+        removeURLContent=[tempContentArray componentsJoinedByString:@"http"];
+    }
     
     //UMSocialPlatformType_Sina 新浪 pod 避免提示重定义
     if (platformType==0) {
         messageObject.text=_shareContent;
+    }else
+    {
+        messageObject.text=removeURLContent;
     }
-    UMShareWebpageObject *shareObject = [UMShareWebpageObject shareObjectWithTitle:_shareTitle descr:_shareContent thumImage:thumbURL];
+    UMShareWebpageObject *shareObject = [UMShareWebpageObject shareObjectWithTitle:_shareTitle descr:removeURLContent thumImage:thumbURL];
     //设置网页地址
     shareObject.webpageUrl =_shareWebURL;
     
