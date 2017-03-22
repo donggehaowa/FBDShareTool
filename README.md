@@ -159,5 +159,24 @@ FBDShareForUMToolV6Alpha3 是基于 UM 友盟的ShareCore的进行分享的逻�
 ```
 ###  更新说明：
 #### // V2.2  对NSLog变成相应的提示 去掉：适配iOS 的ATS https的问题
-
+#### //V2.3把分享内容里面的链接去掉文章的URL  思路：用http分割 祛除掉文章的链接 再用http拼接
+```
+removeURLContent=self.shareContent;
+    NSArray*contentArray=[removeURLContent componentsSeparatedByString:@"http"];
+    //如果有两个URL就去除掉最后的文章的URL
+    if (contentArray.count>2)
+    {
+        NSMutableArray* tempContentArray=[NSMutableArray arrayWithArray:contentArray];
+        [tempContentArray removeLastObject];
+        removeURLContent=[tempContentArray componentsJoinedByString:@"http"];
+    }
+    
+    //UMSocialPlatformType_Sina 新浪 pod 避免提示重定义
+    if (platformType==0) {
+        messageObject.text=_shareContent;
+    }else
+    {
+        messageObject.text=removeURLContent;
+    }
+```
 
